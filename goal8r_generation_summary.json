@@ -1,0 +1,142 @@
+{
+  "goal": "8R",
+  "decision": "GO-GENERATION-STABLE",
+  "campaign": {
+    "kernel_start_timestamp_argo3": "2026-08-15T12:45:09.707607723+02:00",
+    "kernel_final_timestamp_argo3": "2026-08-15T12:53:12.728610424+02:00",
+    "sessions_requested": 5,
+    "sessions_completed": 5,
+    "independent_processes_and_process_groups": true
+  },
+  "image": {
+    "tag": "spikingbrain-cpu:goal8.6-openblas",
+    "expected_id": "sha256:696d98683cee6eef018a73e5c70b402f9103fc24b230356975a7ef1685aed836",
+    "atlas5_id": "sha256:696d98683cee6eef018a73e5c70b402f9103fc24b230356975a7ef1685aed836",
+    "argo3_id": "sha256:696d98683cee6eef018a73e5c70b402f9103fc24b230356975a7ef1685aed836",
+    "size_bytes": 368007299,
+    "identical": true
+  },
+  "runtime": {
+    "torch_version": "2.13.0+openblas.ivybridge",
+    "blas": "OpenBLAS",
+    "blas_info": "open",
+    "libtorch_cpu_dependency": "libopenblas.so.0",
+    "mkl_available": false,
+    "mkldnn_available": false,
+    "cuda_available": false,
+    "atlas5_cpu_capability": "AVX2",
+    "argo3_cpu_capability": "DEFAULT",
+    "threads_per_rank": 4,
+    "preflight_exp_logsigmoid_matmul_fp32_finite": true,
+    "backend": "torch.distributed/Gloo",
+    "network": "host/eno1",
+    "partition": "atlas5 layers 0-13; argo3 layers 14-27"
+  },
+  "prompt": {
+    "text": "Hello",
+    "token_ids": [9707],
+    "length": 1,
+    "add_special_tokens": false,
+    "roundtrip": "Hello",
+    "bos_token": "<|im_start|>",
+    "bos_token_id": 151644,
+    "bos_added": false,
+    "eos_token": "<|endoftext|>",
+    "eos_token_id": 151643,
+    "tokenizer_class": "Qwen2Tokenizer",
+    "tokenizer_checksums_sha256": {
+      "tokenizer_config.json": "c7462055715b3b866c9761ad749bfb364af26eb3776e07d20d14f98509e5ddc4",
+      "special_tokens_map.json": "22bb30aee4ffc3a1ece0ccf70ee85207eb027658d08574d19df7d05ae3abdfdc",
+      "added_tokens.json": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b",
+      "vocab.json": "87a257b04b17642a0688c98cd1df89c398bda4fee532d6f88b38a659ecb4ac8d",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    }
+  },
+  "generation": {
+    "decoding": "greedy argmax",
+    "sampling": false,
+    "temperature": null,
+    "max_new_tokens": 3,
+    "prefill_repeated": false,
+    "third_final_token_reprocessed": false,
+    "deterministic": true,
+    "common_generated_ids": [11, 323, 10565],
+    "common_full_text": "Hello, and welcome",
+    "common_continuation": ", and welcome",
+    "eos_observed": false,
+    "stop_reason": "max_new_tokens"
+  },
+  "cache": {
+    "layers_verified": 28,
+    "positions": [
+      {"event": "after_prefill", "position_all_layers": 1, "bytes_per_rank": 12873728},
+      {"event": "after_processing_generated_1", "position_all_layers": 2, "bytes_per_rank": 12902400},
+      {"event": "after_processing_generated_2", "position_all_layers": 3, "bytes_per_rank": 12931072}
+    ],
+    "growth_bytes_per_processed_token_per_rank": 28672,
+    "layer_position_divergences": 0
+  },
+  "sessions": [
+    {
+      "session": 1, "port": 29508, "prompt_ids": [9707], "generated_ids": [11, 323, 10565],
+      "full_text": "Hello, and welcome", "continuation": ", and welcome", "eos": false, "stop_reason": "max_new_tokens",
+      "timings_ms": {"tokenization": 0.723, "prefill_atlas": 38043.605, "prefill_gloo_send": 3.737, "prefill_gloo_recv": 0.589, "prefill_argo_layers": 54910.997, "first_lm_head": 11710.729, "token_1": 104697.833, "token_2": 12375.920, "token_3": 12300.512, "total": 129380.260},
+      "memory_mib": {"atlas5": {"rss_final": 13208.56, "hwm": 13223.64, "mem_free": 14447.50, "mem_available": 28806.81, "process_swap": 0.0}, "argo3": {"rss_final": 15164.04, "hwm": 15164.04, "mem_free": 14760.16, "mem_available": 30334.12, "process_swap": 0.0, "rss_by_token": [15142.97, 15160.54, 15164.04]}},
+      "clean_shutdown": {"atlas5": true, "argo3": true, "no_container_residue": true, "no_listener_residue": true}
+    },
+    {
+      "session": 2, "port": 29509, "prompt_ids": [9707], "generated_ids": [11, 323, 10565],
+      "full_text": "Hello, and welcome", "continuation": ", and welcome", "eos": false, "stop_reason": "max_new_tokens",
+      "timings_ms": {"tokenization": 0.303, "prefill_atlas": 5710.184, "prefill_gloo_send": 0.642, "prefill_gloo_recv": 0.546, "prefill_argo_layers": 7265.141, "first_lm_head": 512.743, "token_1": 13511.733, "token_2": 13130.151, "token_3": 13027.165, "total": 39671.039},
+      "memory_mib": {"atlas5": {"rss_final": 13213.96, "hwm": 13227.55, "mem_free": 14463.09, "mem_available": 28824.63, "process_swap": 0.0}, "argo3": {"rss_final": 15153.03, "hwm": 15164.64, "mem_free": 14749.67, "mem_available": 30324.66, "process_swap": 0.0, "rss_by_token": [15147.65, 15163.40, 15153.03]}},
+      "clean_shutdown": {"atlas5": true, "argo3": true, "no_container_residue": true, "no_listener_residue": true}
+    },
+    {
+      "session": 3, "port": 29510, "prompt_ids": [9707], "generated_ids": [11, 323, 10565],
+      "full_text": "Hello, and welcome", "continuation": ", and welcome", "eos": false, "stop_reason": "max_new_tokens",
+      "timings_ms": {"tokenization": 0.294, "prefill_atlas": 6252.666, "prefill_gloo_send": 0.619, "prefill_gloo_recv": 0.538, "prefill_argo_layers": 7433.958, "first_lm_head": 510.738, "token_1": 14200.943, "token_2": 12970.140, "token_3": 12623.425, "total": 39796.368},
+      "memory_mib": {"atlas5": {"rss_final": 13226.26, "hwm": 13226.26, "mem_free": 14474.05, "mem_available": 28836.12, "process_swap": 0.0}, "argo3": {"rss_final": 15164.56, "hwm": 15164.56, "mem_free": 14740.20, "mem_available": 30315.39, "process_swap": 0.0, "rss_by_token": [15147.00, 15159.31, 15164.56]}},
+      "clean_shutdown": {"atlas5": true, "argo3": true, "no_container_residue": true, "no_listener_residue": true}
+    },
+    {
+      "session": 4, "port": 29511, "prompt_ids": [9707], "generated_ids": [11, 323, 10565],
+      "full_text": "Hello, and welcome", "continuation": ", and welcome", "eos": false, "stop_reason": "max_new_tokens",
+      "timings_ms": {"tokenization": 0.288, "prefill_atlas": 6623.680, "prefill_gloo_send": 0.647, "prefill_gloo_recv": 0.615, "prefill_argo_layers": 7040.215, "first_lm_head": 509.074, "token_1": 14196.048, "token_2": 12954.145, "token_3": 12383.389, "total": 39535.726},
+      "memory_mib": {"atlas5": {"rss_final": 13228.47, "hwm": 13228.47, "mem_free": 14392.14, "mem_available": 28754.70, "process_swap": 0.0}, "argo3": {"rss_final": 15164.52, "hwm": 15164.52, "mem_free": 14752.60, "mem_available": 30328.00, "process_swap": 0.0, "rss_by_token": [15148.70, 15159.27, 15164.52]}},
+      "clean_shutdown": {"atlas5": true, "argo3": true, "no_container_residue": true, "no_listener_residue": true}
+    },
+    {
+      "session": 5, "port": 29512, "prompt_ids": [9707], "generated_ids": [11, 323, 10565],
+      "full_text": "Hello, and welcome", "continuation": ", and welcome", "eos": false, "stop_reason": "max_new_tokens",
+      "timings_ms": {"tokenization": 0.280, "prefill_atlas": 5361.733, "prefill_gloo_send": 0.669, "prefill_gloo_recv": 0.477, "prefill_argo_layers": 6928.440, "first_lm_head": 511.494, "token_1": 12824.657, "token_2": 12537.058, "token_3": 13438.928, "total": 38802.557},
+      "memory_mib": {"atlas5": {"rss_final": 13226.43, "hwm": 13226.43, "mem_free": 14448.18, "mem_available": 28835.45, "process_swap": 0.0}, "argo3": {"rss_final": 15164.94, "hwm": 15164.94, "mem_free": 14762.24, "mem_available": 30337.85, "process_swap": 0.0, "rss_by_token": [15147.44, 15159.69, 15164.94]}},
+      "clean_shutdown": {"atlas5": true, "argo3": true, "no_container_residue": true, "no_listener_residue": true}
+    }
+  ],
+  "aggregate_timings": {
+    "median_seconds_per_token_from_session_totals": 13.223680,
+    "min_seconds_per_token_from_session_totals": 12.934186,
+    "max_seconds_per_token_from_session_totals": 43.126753,
+    "median_individual_token_latency_seconds": 12.970140,
+    "min_individual_token_latency_seconds": 12.300512,
+    "max_individual_token_latency_seconds": 104.697833,
+    "median_total_session_ms": 39671.039,
+    "min_total_session_ms": 38802.557,
+    "max_total_session_ms": 129380.260,
+    "session_1_cold_start_outlier": true
+  },
+  "kernel_check_argo3": {
+    "new_sigill": 0,
+    "new_invalid_opcode": 0,
+    "new_trap_libtorch_cpu_so": 0,
+    "all_matching_lines": 0
+  },
+  "requirements": {
+    "five_of_five_completed": true,
+    "same_tokens": true,
+    "zero_sigill": true,
+    "zero_process_swap": true,
+    "coherent_cache_positions": true,
+    "clean_shutdown": true
+  }
+}

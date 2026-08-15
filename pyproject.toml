@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spikingbrain-cpu"
+version = "0.1.0"
+description = "Experimental CPU-only distributed inference components for SpikingBrain-7B-W8ASpike"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Sergio / Uraroga" }]
+requires-python = ">=3.10"
+dependencies = ["torch"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

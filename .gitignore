@@ -1,0 +1,71 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Editors / OS
+.DS_Store
+*~
+*.swp
+.env
+.env.*
+!.env.example
+
+# Raw execution logs
+*.err
+*.log
+goal85_logs/
+goal86_logs/
+
+# Raw diagnostic captures
+goal85_*_raw.txt
+goal85_conservative_failures.txt
+goal8_sigill_diagnostics.txt
+
+# Per-process / per-rank raw experiment results
+goal7_*_atlas.json
+goal7_*_argo.json
+goal7_timeout.json
+
+goal8_preflight_*.json
+goal8_session*_atlas.json
+goal8_session*_argo.json
+
+goal8r_s*_atlas.json
+goal8r_s*_argo.json
+
+goal9_a_atlas.json
+goal9_a_argo.json
+goal9_b_atlas.json
+goal9_b_argo.json
+goal9_c_atlas.json
+goal9_c_argo.json
+goal9_chat_atlas.json
+goal9_chat_argo.json
+goal9_chat_attempt1_atlas.json
+goal9_chat_attempt1_argo.json
+
+# Model weights / checkpoints must never enter this repository
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.whl
+*.tar
+*.tar.gz
+core
+core.*
+
+# Large model/checkpoint directories if ever copied locally
+models/
+checkpoints/
+Modelli/
+tokenizer/

@@ -1,0 +1,59 @@
+{
+  "decision": "STOP",
+  "image_id_both_nodes": "sha256:81ac4c783e0627891c3fb2b0fde8c42d703b24521f92c60bfef0b35078059711",
+  "preflight": {
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "fp32_matmul_finite": true,
+    "matmul_container_exit_code": 0,
+    "gloo_synthetic_success": true,
+    "sigill": false
+  },
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "transformers": "4.55.4",
+    "offline": true,
+    "vocab_size": 151643,
+    "vocab_with_added_tokens": 151665,
+    "bos_token": "<|im_start|>",
+    "bos_token_id": 151644,
+    "add_bos_token": false,
+    "eos_token": "<|endoftext|>",
+    "eos_token_id": 151643,
+    "pad_token_id": 151643
+  },
+  "session_1": {
+    "success": true,
+    "clean_shutdown": true,
+    "prompt": "Hello",
+    "prompt_ids": [9707],
+    "prompt_roundtrip": "Hello",
+    "generated_ids": [11, 323, 10565],
+    "full_text": "Hello, and welcome",
+    "continuation": ", and welcome",
+    "stop_reason": "max_new_tokens",
+    "eos_seen": false,
+    "tokenization_ms": 0.330584,
+    "prefill_atlas_ms": 5077.380549,
+    "prefill_send_ms": 0.596995,
+    "prefill_argo_layers_ms": 5959.496176,
+    "first_lm_head_ms": 114.663488,
+    "estimated_new_token_elapsed_ms": [11154.704755, 9844.695968, 9847.147256],
+    "mean_ms_per_new_token": 10282.794041,
+    "total_generation_ms": 30848.382123,
+    "cache_positions_both_ranks": [1, 2, 3],
+    "cache_bytes_per_rank": [12873728, 12902400, 12931072],
+    "atlas_final_memory": {"rss_mib": 13268.11, "hwm_mib": 13268.11, "swap_mib": 0.0, "mem_free_mib": 3685.30, "mem_available_mib": 28526.50},
+    "argo_final_memory": {"rss_mib": 15175.20, "hwm_mib": 15175.20, "swap_mib": 0.0, "mem_free_mib": 373.24, "mem_available_mib": 30214.70}
+  },
+  "session_2": {
+    "success": false,
+    "repeatability_result": "not available",
+    "argo_exit_code": 132,
+    "signal": "SIGILL",
+    "kernel_event": "trap invalid opcode in libtorch_cpu.so",
+    "atlas_error": "Gloo connection closed by peer",
+    "automatic_retry_performed": false,
+    "residual_processes_or_listeners": false
+  }
+}

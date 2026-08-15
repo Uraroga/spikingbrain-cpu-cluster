@@ -1,0 +1,53 @@
+FROM python:3.12.3-slim-bookworm@sha256:fd3817f3a855f6c2ada16ac9468e5ee93e361005bd226fd5a5ee1a504e038c84 AS builder
+
+ARG PYTORCH_REF=v2.13.0
+ARG MAX_JOBS=4
+ENV DEBIAN_FRONTEND=noninteractive \
+    CFLAGS="-O2 -march=ivybridge -mtune=ivybridge" \
+    CXXFLAGS="-O2 -march=ivybridge -mtune=ivybridge" \
+    MAX_JOBS=${MAX_JOBS} \
+    USE_CUDA=0 USE_ROCM=0 USE_XPU=0 \
+    USE_MKL=0 USE_MKLDNN=0 BLAS=OpenBLAS \
+    USE_DISTRIBUTED=1 USE_GLOO=1 USE_MPI=0 USE_NCCL=0 \
+    USE_OPENMP=1 USE_LAPACK=1 \
+    USE_FBGEMM=0 USE_QNNPACK=0 USE_PYTORCH_QNNPACK=0 \
+    USE_XNNPACK=0 USE_NNPACK=0 USE_KINETO=0 \
+    BUILD_TEST=0 BUILD_BINARY=0 \
+    PYTORCH_BUILD_VERSION=2.13.0+openblas.ivybridge \
+    PYTORCH_BUILD_NUMBER=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      build-essential ca-certificates cmake git libopenblas-dev ninja-build \
+    && rm -rf /var/lib/apt/lists/*
+RUN python -m pip install --no-cache-dir \
+      setuptools==78.1.0 wheel==0.45.1 PyYAML==6.0.2 typing_extensions==4.15.0 \
+      cmake==4.1.0 ninja==1.13.0
+WORKDIR /src
+RUN git clone --branch ${PYTORCH_REF} --depth 1 --recursive --shallow-submodules \
+      https://github.com/pytorch/pytorch.git . \
+    && test "$(git rev-parse HEAD)" = "cf30153c4c131c8164ee7798e5022d810682e2cb"
+RUN --mount=type=cache,id=spikingbrain-pytorch-2.13-ivybridge,target=/src/build \
+    python -m pip install --no-cache-dir packaging==25.0 \
+    && python setup.py bdist_wheel
+
+FROM python:3.12.3-slim-bookworm@sha256:fd3817f3a855f6c2ada16ac9468e5ee93e361005bd226fd5a5ee1a504e038c84
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/app/src \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_NO_CACHE_DIR=1
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      libgomp1 libopenblas0-pthread binutils file \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /src/dist/*.whl /wheels/
+COPY requirements.safe-runtime.lock /tmp/requirements.lock
+RUN python -m pip install --no-cache-dir -r /tmp/requirements.lock /wheels/*.whl \
+    && rm -rf /tmp/requirements.lock /wheels
+WORKDIR /app
+COPY pyproject.toml ./
+COPY src ./src
+COPY tests ./tests
+COPY scripts ./scripts
+RUN groupadd --gid 10001 app \
+    && useradd --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app \
+    && chown -R app:app /app
+USER app
+CMD ["python", "-m", "pytest", "-q"]
