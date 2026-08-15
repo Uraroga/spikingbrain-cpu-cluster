@@ -35,7 +35,7 @@ therefore slow (roughly 14 s/token in the short-prompt tests).
 
 Repository and detailed engineering reports:
 
-<OUR_PUBLIC_REPOSITORY_URL>
+https://github.com/Uraroga/spikingbrain-cpu-cluster
 
 - Would a CPU/reference fallback be useful to the project?
 - Are the maintainers aware of related CPU W8ASpike work?

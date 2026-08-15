@@ -177,9 +177,8 @@ Relevant ignore rules include `.venv/`, `__pycache__/`, `.pytest_cache/`,
   may need to build it from the pinned Dockerfile.
 - Model and tokenizer licenses/terms must be reviewed at their upstream source
   before separate download or use.
-- The draft upstream issue still contains
-  `<OUR_PUBLIC_REPOSITORY_URL>` and must not be posted until a public URL exists
-  and the human author approves it.
+- The draft upstream issue must not be posted until the human author approves
+  it.
 - Performance remains limited by per-forward fake quantization of FP32 weights.
 - No formal model-quality evaluation or external reproduction has been done.
 
