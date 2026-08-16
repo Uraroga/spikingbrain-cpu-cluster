@@ -1,0 +1,32 @@
+{
+  "hostname": "argo3-goal13b",
+  "threads": 2,
+  "before": {
+    "rss_mib": 215.1,
+    "hwm_mib": 215.1,
+    "swap_mib": 0.0
+  },
+  "after_load": {
+    "rss_mib": 217.83,
+    "hwm_mib": 217.83,
+    "swap_mib": 0.0
+  },
+  "after_prepare": {
+    "rss_mib": 915.2,
+    "hwm_mib": 1129.55,
+    "swap_mib": 0.0
+  },
+  "after_fp32_source_release": {
+    "rss_mib": 569.99,
+    "hwm_mib": 1129.55,
+    "swap_mib": 0.0
+  },
+  "prepare_ms": 695.1120659996377,
+  "logical_persistent_bytes": 74402412,
+  "serialized_bytes": 74405103,
+  "packed_sha256": "59295b22d848366831bf0705a346051a232d2757210d2f900cec89ef3802ef9e",
+  "outliers": 705638,
+  "shards": [
+    "model-00001-of-00007.safetensors"
+  ]
+}

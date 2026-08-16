@@ -1,0 +1,32 @@
+{
+  "hostname": "atlas5-goal13b",
+  "threads": 4,
+  "before": {
+    "rss_mib": 215.66,
+    "hwm_mib": 215.66,
+    "swap_mib": 0.0
+  },
+  "after_load": {
+    "rss_mib": 218.49,
+    "hwm_mib": 218.49,
+    "swap_mib": 0.0
+  },
+  "after_prepare": {
+    "rss_mib": 915.76,
+    "hwm_mib": 1129.83,
+    "swap_mib": 0.0
+  },
+  "after_fp32_source_release": {
+    "rss_mib": 570.52,
+    "hwm_mib": 1129.83,
+    "swap_mib": 0.0
+  },
+  "prepare_ms": 415.95545200016204,
+  "logical_persistent_bytes": 74402412,
+  "serialized_bytes": 74405103,
+  "packed_sha256": "59295b22d848366831bf0705a346051a232d2757210d2f900cec89ef3802ef9e",
+  "outliers": 705638,
+  "shards": [
+    "model-00001-of-00004.safetensors"
+  ]
+}

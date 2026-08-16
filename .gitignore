@@ -69,3 +69,6 @@ models/
 checkpoints/
 Modelli/
 tokenizer/
+
+# Goal 13B local build cache
+goal13b/cache/
