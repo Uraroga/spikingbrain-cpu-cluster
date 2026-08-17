@@ -27,6 +27,7 @@ for the full development disclosure.
 - CPU-only two-node distributed inference.
 - Working deterministic greedy text generation.
 - Working local tokenizer, upstream chat template, and EOS handling.
+- Working persistent, multi-turn terminal chat across both nodes.
 - Stable custom PyTorch/OpenBLAS runtime for the tested Ivy Bridge host.
 - Not performance optimized and not intended as a quality benchmark.
 
@@ -42,6 +43,8 @@ for the full development disclosure.
 - Persistent GLA and KV autoregressive caches across decode steps.
 - Real completion generation, application of the real tokenizer chat template,
   and EOS termination.
+- Persistent multi-turn chat with one model-stage load per process, explicit
+  context-limit handling, `/reset`, and clean `/quit`/interrupt shutdown.
 - A legacy-x86-safe runtime built with OpenBLAS and an Ivy Bridge compile target.
 
 ## Hardware used
@@ -235,12 +238,34 @@ repeated work dominates inference and is the main candidate for future
 optimization, but it was deliberately left unchanged during runtime
 stabilization and publication freeze.
 
+## Persistent chat
+
+Goal 14 adds a terminal chat loop while keeping both model stages loaded in
+RAM. For every user turn, rank 0 renders the complete conversation with the
+tokenizer's real chat template. Both ranks then create fresh caches and rebuild
+the conversation state for that turn; model weights are not reloaded.
+
+Use `/reset` to clear history and `/quit` to shut down both ranks. The launcher
+requires the local/remote model and tokenizer paths:
+
+```bash
+ATLAS_MODEL=/path/to/atlas-stage \
+TOKENIZER=/path/to/tokenizer \
+ARGO_MODEL=/path/on/argo3/to/checkpoint \
+scripts/run_chat_cluster.sh
+```
+
+See [CHAT_README.md](CHAT_README.md) for deployment variables and concise usage
+instructions, and [GOAL14_PERSISTENT_CHAT.md](GOAL14_PERSISTENT_CHAT.md) for the
+engineering report.
+
 ## Repository layout
 
 ```text
 src/spikingbrain_cpu/   CPU operators, blocks, partitioning, loader, protocol
 scripts/                diagnostics, stage tools, and distributed entry points
 tests/                  operator, block, loader, partition, and protocol tests
+CHAT_README.md          practical persistent-chat launcher guide
 Dockerfile*             original CPU environment and stable OpenBLAS build
 GOAL*.md                chronological engineering reports
 goal*.json              selected aggregate, machine-readable summaries
@@ -336,6 +361,7 @@ approaches and changed decisions:
 - [Goal 8.6: safe OpenBLAS runtime](GOAL8_6_SAFE_RUNTIME.md)
 - [Goal 8R: stable generation](GOAL8R_STABLE_GENERATION.md)
 - [Goal 9: real prompts](GOAL9_REAL_PROMPTS.md)
+- [Goal 14: persistent two-node chat](GOAL14_PERSISTENT_CHAT.md)
 
 See [EXPERIMENT_HISTORY.md](EXPERIMENT_HISTORY.md) for a compact chronology.
 
